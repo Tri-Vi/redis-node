@@ -1,0 +1,11 @@
+{
+  "name": "redis-node",
+  "version": "1.0.0",
+  "description": "A CRUD application using Node, Express, and Redis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tri Vi",
+  "license": "ISC"
+}
