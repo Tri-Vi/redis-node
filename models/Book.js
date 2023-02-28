@@ -12,6 +12,8 @@ module.exports = function(sequelize, DataTypes){
       required: true,
       allowNull: false,
     }
+  }, {
+    tableName: 'Book'
   });
 
   /*
