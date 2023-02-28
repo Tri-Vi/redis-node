@@ -1,7 +1,9 @@
 const express = require('express');
-const router = express.router();
-
-const UserController = require(__basedir + "/controller/UserController");
+const router = express.Router();
+const UserController = require(__basedir + "/controllers/UserController");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const models = require(__basedir + "/models");
 
 // Get All Book
 router.get('/', (req,res)=>{
