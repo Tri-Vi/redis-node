@@ -6,7 +6,7 @@ const path = require('path');
 var db = {}
 const sequelize = new Sequelize(
   process.env.DATABASE_SCHEMA,
-  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_USER,
   process.env.DATABASE_PASSWORD,
   {
     host: process.env.DATABASE_HOST,
@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
     logging: console.log,
     pool: {
       max: Number(process.env.DATABASE_POOL_MAX),
-      min: Number(process.env.DATABSE_POOL_MIN),
+      min: Number(process.env.DATABASE_POOL_MIN),
       acquire: Number(process.env.DATABASE_POOL_ACQUIRE),
       idle: Number(process.env.DATABASE_POOL_IDLE)
     },
@@ -23,11 +23,11 @@ const sequelize = new Sequelize(
 )
 
 // Loop through the files in this directory and import them
-fs.readFileSync(__dirname)
+fs.readdirSync(__dirname)
   .filter(file => {
     return (file != 'index.js') && (file.slice(-3) === '.js')
   }).forEach(file =>{
-    var model = sequelize['import'](path.join(__dirname, file));
+    var model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model
   });
 
