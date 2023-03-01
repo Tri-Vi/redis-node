@@ -23,7 +23,8 @@ module.exports = function(sequelize, DataTypes){
       allowNull: false,
     }
   },{
-    tableName: 'User'
+    tableName: 'User',
+    timestamps: false
   });
 
   /*
