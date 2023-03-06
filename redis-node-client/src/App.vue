@@ -10,7 +10,7 @@
       dark
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>TRIVI</v-toolbar-title>
+      <v-toolbar-title>BU</v-toolbar-title>
       <v-spacer></v-spacer>
 
       
@@ -34,7 +34,7 @@
             </v-list-item>
 
             <!-- User -->
-            <v-list-item to="/User">
+            <v-list-item to="/book">
               <v-list-item-icon>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-icon>
@@ -42,7 +42,7 @@
             </v-list-item>
 
             <!-- Book -->
-            <v-list-item to="/Book">
+            <v-list-item to="/user">
               <v-list-item-icon>
                 <v-icon>mdi-book</v-icon>
               </v-list-item-icon>
