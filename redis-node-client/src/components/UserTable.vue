@@ -16,7 +16,9 @@ export default {
   methods: {
     ...mapActions(['fetchUsers'])
   },
-  computed: mapGetters(['allUsers']),
+  computed: {
+    ...mapGetters(['allUsers'])
+  },
   created() {
     this.fetchUsers();
   }
