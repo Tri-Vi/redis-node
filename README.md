@@ -2,9 +2,15 @@
  A CRUD application using Node, Express, and Redis
 
  ### BACKEND
+ - NODE
+ - EXPRESS
+ - REDIS - Cache Management
 
  ### FRONTEND
-
+ - Vue
+ - Vuetify - UI Material Framework
+ - Vuex - State Management
+ 
  ### .env 
 ```
 # SERVER SETUP
