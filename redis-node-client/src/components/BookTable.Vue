@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h3>Books Dashboard</h3>
-    <div class="books">
-      <div v-for="book in allBooks" :key="book.id">
-        {{book.id}} | {{book.name}}
-      </div>
-    </div>
+    <v-data-table
+      :headers="headers"
+      :items="allBooks"
+      :items-per-page="5"
+      class="elevation-1"
+    ></v-data-table>
   </div>
 </template>
 
@@ -13,6 +13,27 @@
 import  { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'BookTable',
+  data(){
+    return {
+      headers: [
+        {
+          text: 'Id',
+          sortable: true,
+          value: 'id'
+        },
+        {
+          text: 'Book Name',
+          sortable: true,
+          value: 'name'
+        },
+        {
+          text: 'Action',
+          sortable: false,
+          value: ''
+        }
+      ]
+    }
+  },
   methods: {
     ...mapActions(['fetchBooks'])
   },
