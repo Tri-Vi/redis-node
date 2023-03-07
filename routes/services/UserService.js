@@ -10,6 +10,7 @@ router.get('/', (req,res)=>{
     UserController.find().then(result=>{
       res.status(200).json(result)
     }).catch(err=>{
+      console.log('hit err');
       res.status(err.status).json(err)
     })
 });

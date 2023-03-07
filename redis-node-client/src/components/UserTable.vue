@@ -4,7 +4,7 @@
     <div class="users">
 
       <div v-for="user in allUsers" :key="user.id" class="user">
-        {{ user.first_name }}
+        {{user.id}} | {{ user.first_name }} | {{user.last_name}} |  {{user.email}}
       </div>
     </div>
   </div>
@@ -13,9 +13,8 @@
 <script>
 import  { mapGetters, mapActions } from 'vuex';
 export default {
-  name: "Users",
   methods: {
-    ...mapActions['fetchUsers']
+    ...mapActions(['fetchUsers'])
   },
   computed: mapGetters(['allUsers']),
   created() {

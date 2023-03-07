@@ -9,13 +9,14 @@
       color="deep-purple"
       dark
     >
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>BU</v-toolbar-title>
       <v-spacer></v-spacer>
 
       
     </v-app-bar>
     <v-navigation-drawer
+      disable-resize-watcher
       v-model="drawer"
       absolute
       temporary>
@@ -34,7 +35,7 @@
             </v-list-item>
 
             <!-- User -->
-            <v-list-item to="/book">
+            <v-list-item to="/user">
               <v-list-item-icon>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-icon>
@@ -42,7 +43,7 @@
             </v-list-item>
 
             <!-- Book -->
-            <v-list-item to="/user">
+            <v-list-item to="/book">
               <v-list-item-icon>
                 <v-icon>mdi-book</v-icon>
               </v-list-item-icon>

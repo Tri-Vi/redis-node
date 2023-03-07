@@ -9,9 +9,9 @@ const getters = {
 };
 const actions = {
   async fetchUsers({commit}){
-    const response = await axios.get('http://localhost:3000/api/users');
-    commit('setTodos', response.data)
-  }
+    const response = await axios.get('http://localhost:3000/api/user');
+    commit('setUsers', response.data.rows)
+  },
 };
 
 const mutations = {
