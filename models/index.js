@@ -17,8 +17,7 @@ const sequelize = new Sequelize(
       min: Number(process.env.DATABASE_POOL_MIN),
       acquire: Number(process.env.DATABASE_POOL_ACQUIRE),
       idle: Number(process.env.DATABASE_POOL_IDLE)
-    },
-    timezone: 'America/Chicago'
+    }
   } 
 )
 
