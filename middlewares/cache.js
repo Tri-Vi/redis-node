@@ -1,9 +1,9 @@
 const redisClient = require(__basedir + '/db/redis-client.js');
 
 const cache = async (req,res,next) => {
-  let { id } = req.params;
   try {
-    let response = await redisClient.get(id);
+    let cacheId = req.originalUrl
+    let response = await redisClient.get(cacheId);
     if(response){
       res.status(200).json(
         JSON.parse(response)

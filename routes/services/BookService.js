@@ -8,9 +8,12 @@ const {cache} = require(__basedir + "/middlewares/cache.js");
 const redisClient = require(__basedir+ '/db/redis-client.js');
 
 // Get All Books
-router.get('/', (req,res)=>{
-    console.log('hit');
-    BookController.find().then(result=>{
+router.get('/', cache, (req,res)=>{
+    BookController.find().then(async (result)=>{
+      let cacheId = req.originalUrl;
+      await redisClient.set(cacheId, JSON.stringify(result), {
+        'EX': 60
+      });
       res.status(200).json(result)
     }).catch(err=>{
       res.status(err.status).json(err)
@@ -19,10 +22,9 @@ router.get('/', (req,res)=>{
 
 // Get Single Book
 router.get('/:id', cache, (req,res) => {
-    let {id} = req.params;
-    console.log('hit single book');
     BookController.findById(req.params.id).then(async (result) =>{
-      await redisClient.set(id, JSON.stringify(result), {
+      let cacheId = req.originalUrl;
+      await redisClient.set(cacheId, JSON.stringify(result), {
         'EX': 60
       });
       res.status(200).json(result)
