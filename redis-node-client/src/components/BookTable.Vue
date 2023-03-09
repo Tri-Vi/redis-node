@@ -4,7 +4,30 @@
       :headers="headers"
       :items="allBooks"
       :items-per-page="5"
-      class="elevation-1"
+      class="elevation-1">
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon
+          small
+          class="mr-2"
+          @click="editItem(item)"
+        >
+          mdi-pencil
+        </v-icon>
+        <v-icon
+          small
+          @click="deleteItem(item)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
+      <template v-slot:no-data>
+        <v-btn
+          color="primary"
+          @click="fetchBooks"
+        >
+          Reset
+        </v-btn>
+      </template>
     ></v-data-table>
   </div>
 </template>
@@ -27,9 +50,9 @@ export default {
           value: 'name'
         },
         {
-          text: 'Action',
+          text: 'Actions',
           sortable: false,
-          value: ''
+          value: 'actions'
         }
       ]
     }
