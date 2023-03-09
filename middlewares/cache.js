@@ -5,12 +5,10 @@ const cache = async (req,res,next) => {
   try {
     let response = await redisClient.get(id);
     if(response){
-      console.log('cached data');
       res.status(200).json(
         JSON.parse(response)
       )
     } else {
-      console.log('next');
       next();
     }
   } catch (err){

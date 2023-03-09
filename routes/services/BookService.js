@@ -17,13 +17,14 @@ router.get('/', (req,res)=>{
     })
 });
 
-
 // Get Single Book
 router.get('/:id', cache, (req,res) => {
     let {id} = req.params;
     console.log('hit single book');
-    BookController.findById(req.params.id).then(result =>{
-      redisClient.set(id, JSON.stringify(result), 'EX', 5);
+    BookController.findById(req.params.id).then(async (result) =>{
+      await redisClient.set(id, JSON.stringify(result), {
+        'EX': 60
+      });
       res.status(200).json(result)
     }).catch(err=>{
       res.status(err.status).json(err)
