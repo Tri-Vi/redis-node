@@ -6,11 +6,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const cors= require('cors');
-const redis = require('redis');
-const redisClient = redis.createClient(process.env.REDIS_PORT);
-redisClient.on('error', (err)=>{
-  console.error(err.message);
-})
+const apiRoutes = require('./routes/api.js');
+const indexRoute = require('./routes/index.js')
+const redisClient = require('./db/redis-client.js');
 
 // Cors
 app.use(cors());
@@ -30,10 +28,11 @@ app.use(bodyParser.json({
 app.use(express.static(__dirname + '/public'));
 
 // Routes
-app.use('/api', require('./routes/api.js'));
-app.use('/', require('./routes/index.js'));
+app.use('/api', apiRoutes);
+app.use('/', indexRoute);
 
 app.listen(port, (req,res) => {
   console.log(`listening on ${port}`)
+  redisClient.connect();
 })
 
