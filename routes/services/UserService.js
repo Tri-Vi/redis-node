@@ -4,8 +4,6 @@ const UserController = require(__basedir + "/controllers/UserController");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const models = require(__basedir + "/models");
-const {cache} = require(__basedir + "/middlewares/cache.js");
-const redisClient = require(__basedir+ '/db/redis-client.js');
 
 // Get All Users
 router.get('/', (req,res)=>{
@@ -18,10 +16,8 @@ router.get('/', (req,res)=>{
 });
 
 // Get Single User
-router.get('/:id', cache, (req,res) => {
-    let { id } = req.params;
+router.get('/:id', (req,res) => {
     UserController.findById(req.params.id).then(result =>{
-      redisClient.set(id, JSON.stringify(results));
       res.status(200).json(result)
     }).catch(err=>{
       res.status(err.status).json(err)
