@@ -162,9 +162,10 @@ export default {
       this.dialogDelete = true
     },
     deleteItemConfirm () {
-      // Should dispatch action and commit mutation
-      // Action should call delete request and return updated available books 
-      this.allBooks.splice(this.editedIndex, 1)
+      this.$store.dispatch('deleteBook', {
+        editedIndex: this.editedIndex,
+        editedItem: this.editedItem
+      })
       this.closeDelete();
     },
     close () {
@@ -183,14 +184,11 @@ export default {
     },
     save () {
         if (this.editedIndex > -1) {
-          // Dispatch edit book action
           this.$store.dispatch('editBook', {
             editedIndex: this.editedIndex,
             editedItem: this.editedItem
           })
-          //Object.assign(this.allBooks[this.editedIndex], this.editedItem)
         } else {
-          // Dispatch add book action
           this.$store.dispatch('addBook', this.editedItem)
         }
         this.close()

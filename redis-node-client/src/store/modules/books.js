@@ -9,6 +9,7 @@ const getters = {
   allBooks: state => state.books,
   errors: state => state.errors
 }
+
 const actions = {
   async fetchBooks({commit}){
     try {
@@ -27,16 +28,38 @@ const actions = {
     }
   },
   async editBook({commit}, payload){
-    const response = await axios.put('http://localhost:3000/api/book', payload);
-    commit('testMutation', response)
+    try {
+      const response = await axios.put(`http://localhost:3000/api/book/${payload.editedItem.id}`, payload.editedItem);
+      commit('editBook', {
+        editedIndex: payload.editedIndex,
+        ...response
+      })
+    } catch(error){
+      commit('setErrors', error);
+    }
+  },
+  async deleteBook({commit}, payload){
+    try {
+      await axios.delete(`http://localhost:3000/api/book/${payload.editedItem.id}`)
+      commit('deleteBook', {
+        editedIndex: payload.editedIndex,
+      })
+    } catch(error){
+      commit('setErrors', error);
+    }
   }
 }
 const mutations = {
   setBooks: (state, books) => {state.books = books},
   setErrors: (state, error) => {state.errors.push(error)},
-  testMutation: (state, payload) => {console.log(payload)},
   newBook: (state, book) => { 
     state.books.push(book)
+  },
+  editBook: (state, payload) => {
+    Object.assign(state.books[payload.editedIndex], payload.data);
+  },
+  deleteBook: (state, payload) => {
+    state.books.splice(payload.editedIndex, 1)
   }
 }
 export default {
