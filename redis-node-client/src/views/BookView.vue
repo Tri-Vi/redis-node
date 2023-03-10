@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h1>Book Page</h1>
     <BookTable></BookTable>
   </v-container>
 </template>
