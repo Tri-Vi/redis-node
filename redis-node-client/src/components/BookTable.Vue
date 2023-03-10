@@ -142,7 +142,7 @@ export default {
       editedItem: {
         name: ''
       },
-      defaultItm: {
+      defaultItem: {
         name: ''
       }
 
@@ -151,6 +151,7 @@ export default {
   methods: {
     ...mapActions(['fetchBooks']),
     editItem(item){
+      // 
       this.editedIndex = this.allBooks.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
@@ -164,7 +165,7 @@ export default {
       // Should dispatch action and commit mutation
       // Action should call delete request and return updated available books 
       this.allBooks.splice(this.editedIndex, 1)
-      this.closeDelete()
+      this.closeDelete();
     },
     close () {
       this.dialog = false
@@ -182,9 +183,15 @@ export default {
     },
     save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          // Dispatch edit book action
+          this.$store.dispatch('editBook', {
+            editedIndex: this.editedIndex,
+            editedItem: this.editedItem
+          })
+          //Object.assign(this.allBooks[this.editedIndex], this.editedItem)
         } else {
-          this.allBooks.push(this.editedItem)
+          // Dispatch add book action
+          this.$store.dispatch('addBook', this.editedItem)
         }
         this.close()
       },
