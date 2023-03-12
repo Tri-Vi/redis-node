@@ -1,5 +1,7 @@
 # redis-node
- A CRUD application using Node, Express, and Redis
+ A CRUD application using
+ - Node, Express, Redis, MySQL
+ - Vue
 
  ### BACKEND
  - NODE
