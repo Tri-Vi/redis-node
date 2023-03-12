@@ -49,6 +49,14 @@
               </v-list-item-icon>
               <v-list-item-title>Book</v-list-item-title>
             </v-list-item>
+
+            <!-- Book -->
+            <v-list-item to="/readingList">
+              <v-list-item-icon>
+                <v-icon>mdi-list-box</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Reading List</v-list-item-title>
+            </v-list-item>
           </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
