@@ -21,9 +21,10 @@ const actions = {
       commit('setErrors', error)
     }
   },
-  async editBook({commit}, payload){
+  async editUser({commit}, payload){
     try {
       const response = await axios.put(`http://localhost:3000/api/user/${payload.editedItem.id}`, payload.editedItem);
+      console.log(response);
       commit('editUser', {
         editedIndex: payload.editedIndex,
         ...response
@@ -32,7 +33,7 @@ const actions = {
       commit('setErrors', error);
     }
   },
-  async deleteBook({commit}, payload){
+  async deleteUser({commit}, payload){
     try {
       await axios.delete(`http://localhost:3000/api/user/${payload.editedItem.id}`)
       commit('deleteUser', {
@@ -50,10 +51,10 @@ const mutations = {
   newUser: (state, user) => { 
     state.users.push(user)
   },
-  editBook: (state, payload) => {
+  editUser: (state, payload) => {
     Object.assign(state.users[payload.editedIndex], payload.data);
   },
-  deleteBook: (state, payload) => {
+  deleteUser: (state, payload) => {
     state.users.splice(payload.editedIndex, 1)
   } 
 };

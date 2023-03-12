@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const state = {
   books: [],
-  errors: [],
+  errors: []
 }
 
 const getters = {
