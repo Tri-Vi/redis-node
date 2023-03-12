@@ -17,8 +17,11 @@ module.exports = function(sequelize, DataTypes){
     timestamps: false
   });
 
-  /*
-    Association - TBU
-  */
+  Book.associate = function(models){
+    Book.ReadingLists = Book.hasMany(models.ReadingList, {
+      as: 'reading_lists',
+      foreignKey: 'book_id'
+    })
+  }
   return Book;
 }
