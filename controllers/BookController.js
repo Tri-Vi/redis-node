@@ -44,7 +44,7 @@ class BookController {
   add(params){
     return new Promise((resolve, reject) => {
       let {name} = params;
-      models.User.create({
+      models.Book.create({
         name: name
       }).then((result)=>{
         resolve(result)
