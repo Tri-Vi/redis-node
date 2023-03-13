@@ -39,6 +39,7 @@
               <v-card-text>
                 <v-container>
                   <v-row>
+                    <!-- Status -->
                     <v-col
                       cols="12"
                       sm="6"
@@ -48,6 +49,36 @@
                         v-model="editedItem.status"
                         label="Status"
                       ></v-text-field>
+                    </v-col>
+
+                    <!-- User -->
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                     <v-select
+                        :items="allUsers"
+                        item-text="email"
+                        item-value="id"
+                        label="User Email"
+                        v-model="editedItem.user_id"
+                      ></v-select>
+                    </v-col>
+                    
+                    <!-- Book -->
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-select
+                        :items="allBooks"
+                        item-value="id"
+                        item-text="name"
+                        label="Book Name"
+                        v-model="editedItem.book_id"
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -163,7 +194,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchReadingList']),
+    ...mapActions(['fetchReadingList', 'fetchUsers', 'fetchBooks']),
     editItem(item){
       this.editedIndex = this.readingList.indexOf(item)
       this.editedItem = Object.assign({}, item)
@@ -208,7 +239,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['readingList']),
+    ...mapGetters(['readingList', 'allBooks', 'allUsers']),
     formTitle(){
       return this.editedIndex === -1 ? 'New Assignment' : 'Edit Assignment' 
     }
@@ -223,6 +254,8 @@ export default {
   },
   created() {
     this.fetchReadingList();
+    this.fetchBooks();
+    this.fetchUsers();
   }
 }
 </script>
