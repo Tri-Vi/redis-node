@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h1>Reading List</h1>
     <ReadingList></ReadingList>
   </v-container>
 </template>
