@@ -61,11 +61,34 @@ class ReadingListController {
   }
   add(params){
     return new Promise((resolve, reject) => {
-      let {name} = params;
+      let {status, book_id, user_id} = params;
       models.ReadingList.create({
-        name: name
+        status: status,
+        book_id: book_id,
+        user_id: user_id
       }).then((result)=>{
-        resolve(result)
+        if(result.id){
+          models.ReadingList.findByPk(result.id, {
+            include: [
+              {
+                as: 'book',
+                model: models.Book
+              },
+              {
+                as: 'user',
+                model: models.User
+              }
+            ]
+          }).then(addedResult => {
+            resolve(addedResult)
+          }).catch(err => {
+            reject({
+              status: 500,
+              error: err,
+              message: "An error occurred"
+            })
+          })
+        }
       }).catch((err)=>{
         reject({
           status: 500,

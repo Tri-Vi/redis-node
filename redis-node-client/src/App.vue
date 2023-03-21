@@ -8,7 +8,13 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>RENO</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
 
+      <v-btn icon>
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
       
     </v-app-bar>
     <v-navigation-drawer
@@ -53,8 +59,18 @@
               </v-list-item-icon>
               <v-list-item-title>Reading List</v-list-item-title>
             </v-list-item>
+          
+
+          <!-- Sign Out -->
+            <v-list-item to="/logout" v-if="loggedIn">
+              <v-list-item-icon>
+                <v-icon>mdi-logout</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Sign Out</v-list-item-title>
+            </v-list-item>
           </v-list-item-group>
       </v-list>
+
     </v-navigation-drawer>
 
     <v-main>
@@ -79,6 +95,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
+    loggedIn: true
   }),
 };
 </script>

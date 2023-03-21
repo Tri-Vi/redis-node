@@ -16,9 +16,9 @@ const actions = {
   },
   async addAssignment({commit}, payload){
     try {
-      console.log(payload);
-      // const response = await axios.post('http://localhost:3000/api/readingList', payload);
-      // commit('newAssignment', response.data)
+      //console.log(payload);
+      const response = await axios.post('http://localhost:3000/api/readingList', payload);
+      commit('newAssignment', response.data)
     } catch(error){
       commit('setErrors', error)
     }

@@ -12,7 +12,7 @@ router.get('/', cache, (req,res)=>{
   ReadingListController.find().then(async (result)=>{
       let cacheId = req.originalUrl;
       await redisClient.set(cacheId, JSON.stringify(result), {
-        'EX': 60
+        'EX': 5
       });
       res.status(200).json(result)
     }).catch(err=>{
@@ -25,7 +25,7 @@ router.get('/:id', cache, (req,res) => {
   ReadingListController.findById(req.params.id).then(async (result) =>{
       let cacheId = req.originalUrl;
       await redisClient.set(cacheId, JSON.stringify(result), {
-        'EX': 60
+        'EX': 5
       });
       res.status(200).json(result)
     }).catch(err=>{

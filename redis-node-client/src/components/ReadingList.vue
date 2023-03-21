@@ -184,12 +184,16 @@ export default {
       editedItem: {
         book_id: '',
         user_id: '',
-        status: ''
+        status: '',
+        user: {},
+        book: {}
       },
       defaultItem: {
         book_id: '',
         user_id: '',
-        status: ''
+        status: '',
+        user: {},
+        book: {}
       }
     }
   },
