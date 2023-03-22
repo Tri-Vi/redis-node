@@ -6,17 +6,16 @@ const state = {
 };
 
 const getters = {
-  readingList: (state) => state.readingList
+  readingList: (state) => state.readingList,
+  readingListErrors: (state) => state.errors
 };
 const actions = {
   async fetchReadingList({commit}){
     const response = await axios.get('http://localhost:3000/api/readingList');
-    console.log(response);
     commit('setReadingList', response.data.rows)
   },
   async addAssignment({commit}, payload){
     try {
-      //console.log(payload);
       const response = await axios.post('http://localhost:3000/api/readingList', payload);
       commit('newAssignment', response.data)
     } catch(error){
@@ -26,9 +25,10 @@ const actions = {
   async editAssignment({commit}, payload){
     try {
       const response = await axios.put(`http://localhost:3000/api/readingList/${payload.editedItem.id}`, payload.editedItem);
+      
       commit('editAssignment', {
         editedIndex: payload.editedIndex,
-        ...response
+        ...response.data
       })
     } catch(error){
       commit('setErrors', error);
@@ -48,13 +48,12 @@ const actions = {
 
 const mutations = {
   setReadingList: (state, readingList) => {
-    console.log(readingList);
     state.readingList = readingList
   },
   setErrors: (state, error) => {state.errors.push(error)},
   newAssignment: (state, assignment) => {state.readingList.push(assignment)},
   editAssignment: (state, payload) => {
-    Object.assign(state.readingList[payload.editedIndex], payload.data);
+    Object.assign(state.readingList[payload.editedIndex], payload);
   },
   deleteAssignment: (state, payload) => {
     state.readingList.splice(payload.editedIndex, 1)

@@ -27,7 +27,7 @@ const actions = {
       console.log(response);
       commit('editUser', {
         editedIndex: payload.editedIndex,
-        ...response
+        ...response.data
       })
     } catch(error){
       commit('setErrors', error);
@@ -52,7 +52,7 @@ const mutations = {
     state.users.push(user)
   },
   editUser: (state, payload) => {
-    Object.assign(state.users[payload.editedIndex], payload.data);
+    Object.assign(state.users[payload.editedIndex], payload);
   },
   deleteUser: (state, payload) => {
     state.users.splice(payload.editedIndex, 1)

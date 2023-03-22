@@ -32,7 +32,7 @@ const actions = {
       const response = await axios.put(`http://localhost:3000/api/book/${payload.editedItem.id}`, payload.editedItem);
       commit('editBook', {
         editedIndex: payload.editedIndex,
-        ...response
+        ...response.data
       })
     } catch(error){
       commit('setErrors', error);
@@ -56,7 +56,7 @@ const mutations = {
     state.books.push(book)
   },
   editBook: (state, payload) => {
-    Object.assign(state.books[payload.editedIndex], payload.data);
+    Object.assign(state.books[payload.editedIndex], payload);
   },
   deleteBook: (state, payload) => {
     state.books.splice(payload.editedIndex, 1)

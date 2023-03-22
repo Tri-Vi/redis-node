@@ -232,7 +232,7 @@ export default {
     },
     save () {
       if (this.editedIndex > -1) {
-        this.$store.dispatch('editUpdateAssignment', {
+        this.$store.dispatch('editAssignment', {
           editedIndex: this.editedIndex,
           editedItem: this.editedItem
         })

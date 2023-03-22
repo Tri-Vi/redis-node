@@ -103,7 +103,28 @@ class ReadingListController {
     return new Promise((resolve, reject)=>{
       models.ReadingList.findByPk(id).then(foundItem=> {
         foundItem.update(params).then(updatedItem =>{
-          resolve(updatedItem)
+          if(updatedItem.id){
+            models.ReadingList.findByPk(updatedItem.id, {
+              include: [
+                {
+                  as: 'book',
+                  model: models.Book
+                },
+                {
+                  as: 'user',
+                  model: models.User
+                }
+              ]
+            }).then(item =>{
+              resolve(item)
+            }).catch(err => {
+              reject({
+                status: 500,
+                error: err,
+                message: "An error occurred"
+              })
+            })
+          }
         }).catch(err =>{
           reject({
             status: 500,
