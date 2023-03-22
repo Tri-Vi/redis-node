@@ -4,6 +4,7 @@
       :headers="headers"
       :items="allBooks"
       :items-per-page="5"
+      :search="search"
       class="elevation-1">
 
       <template v-slot:top>
@@ -14,6 +15,13 @@
             inset
             vertical>
           </v-divider>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog
             v-model="dialog"
@@ -119,6 +127,7 @@ export default {
   name: 'BookTable',
   data(){
     return {
+      search: "",
       dialog: false,
       dialogDelete: false,
       headers: [

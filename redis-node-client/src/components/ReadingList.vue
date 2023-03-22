@@ -4,7 +4,8 @@
       :headers="headers"
       :items="readingList"
       :items-per-page="5"
-      class="elevation-1">
+      class="elevation-1"
+      :search="search">
       
       <template v-slot:[`item.fullname`]="{ item }">{{ item.user.first_name }} {{ item.user.last_name }}</template>
       <template v-slot:[`item.status`]="{ item }">
@@ -23,6 +24,13 @@
             inset
             vertical>
           </v-divider>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog
             v-model="dialog"
@@ -165,6 +173,7 @@ export default {
   name: 'ReadingList',
   data(){
     return {
+      search: "",
       dialog: false,
       dialogDelete: false,
       headers: [

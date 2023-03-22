@@ -4,12 +4,20 @@
       :headers="headers"
       :items="allUsers"
       :items-per-page="5"
-      class="elevation-1">
+      class="elevation-1"
+      :search="search">
 
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>User Dashboard</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -105,6 +113,7 @@ import  { mapGetters, mapActions } from 'vuex';
 export default {
   data(){
     return {
+      search: "",
       dialog: false,
       dialogDelete: false,
       headers: [
