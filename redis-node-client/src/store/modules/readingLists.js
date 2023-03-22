@@ -2,12 +2,14 @@ import axios from 'axios';
 
 const state = {
   readingList: [],
-  errors: []
+  errors: [],
+  readingStatus: ['assigned', 'reading', 'completed']
 };
 
 const getters = {
   readingList: (state) => state.readingList,
-  readingListErrors: (state) => state.errors
+  readingListErrors: (state) => state.errors,
+  readingStatus: (state) => state.readingStatus
 };
 const actions = {
   async fetchReadingList({commit}){

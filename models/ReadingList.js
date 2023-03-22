@@ -8,7 +8,13 @@ module.exports = function(sequelize, DataTypes){
       autoIncrement: true
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
+      allowNull: true,
+      required: false,
+      values: ['assigned', 'reading', 'completed']
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
       allowNull: true,
       required: false,
     }

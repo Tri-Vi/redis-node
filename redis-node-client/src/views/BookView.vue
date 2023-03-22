@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container> 
     <BookTable></BookTable>
   </v-container>
 </template>

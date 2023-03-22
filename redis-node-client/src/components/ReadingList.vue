@@ -7,7 +7,14 @@
       class="elevation-1">
       
       <template v-slot:[`item.fullname`]="{ item }">{{ item.user.first_name }} {{ item.user.last_name }}</template>
-      
+      <template v-slot:[`item.status`]="{ item }">
+        <v-chip
+          :color="getColor(item.status)"
+          dark
+        >
+          {{ item.status }}
+        </v-chip>
+      </template>
       <template v-slot:top>
         <v-toolbar
           flat>
@@ -45,10 +52,17 @@
                       sm="6"
                       md="4"
                     >
+                      <!-- Reading Status -->
+                      <!-- 
                       <v-text-field
                         v-model="editedItem.status"
                         label="Status"
-                      ></v-text-field>
+                      ></v-text-field> -->
+                      <v-select
+                        :items="readingStatus"
+                        label="Status"
+                        v-model="editedItem.status"
+                      ></v-select>
                     </v-col>
 
                     <!-- User -->
@@ -241,9 +255,14 @@ export default {
       }
       this.close()
     },
+    getColor (status) {
+        if (status == 'assigned') return 'gray'
+        else if (status == 'reading') return 'green'
+        else if (status == 'completed') return 'blue'
+      },
   },
   computed: {
-    ...mapGetters(['readingList', 'allBooks', 'allUsers']),
+    ...mapGetters(['readingList', 'allBooks', 'allUsers', 'readingStatus']),
     formTitle(){
       return this.editedIndex === -1 ? 'New Assignment' : 'Edit Assignment' 
     }
