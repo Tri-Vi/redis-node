@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const logger = require(__basedir + '/util/logging.js');
 
 var db = {}
 const sequelize = new Sequelize(
@@ -11,7 +12,9 @@ const sequelize = new Sequelize(
   {
     host: process.env.DATABASE_HOST,
     dialect: process.env.DATABASE_DIALECT,
-    logging: console.log,
+    logging: (str)=> {
+      logger.info(str)
+    },
     pool: {
       max: Number(process.env.DATABASE_POOL_MAX),
       min: Number(process.env.DATABASE_POOL_MIN),

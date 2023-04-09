@@ -15,5 +15,6 @@ module.exports = function(options){
       'user_id' : user_id,
       'user_email': user_email
     })
+    next();
   }
 }
