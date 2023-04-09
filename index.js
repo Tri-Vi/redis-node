@@ -27,6 +27,9 @@ app.use(bodyParser.json({
 // Static folder
 app.use(express.static(__dirname + '/public'));
 
+// Logging
+app.use(require(global.__basedir + '/middlewares/logger.js')());
+
 // Routes
 app.use('/api', apiRoutes);
 app.use('/', indexRoute);
