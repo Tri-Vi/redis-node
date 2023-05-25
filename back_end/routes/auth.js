@@ -15,10 +15,11 @@ const users = [
     password: 'two'
   }
 ]
-router.get('/', (req,res)=>{
-  res.json({
-    success: true
+router.get('/testtoken', (req,res)=>{
+  const token =  jwt.sign({username: 'abc'}, process.env.JWT_TOKEN_SECRET, {
+    expiresIn: '5s'
   })
+  res.json({token})
 });
 
 router.post('/login', (req,res)=>{
