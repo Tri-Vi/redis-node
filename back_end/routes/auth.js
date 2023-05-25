@@ -4,7 +4,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 const users = [
   {
     username: 'one',
@@ -79,6 +78,11 @@ router.post('/register', (req,res)=>{
   })
 
   res.json({token});
+})
+
+// Logout
+router.post('/logout', (req,res)=> {
+  res.json({ message: 'Logout successful' });
 })
 
 
