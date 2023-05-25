@@ -8,7 +8,9 @@ const bodyParser = require("body-parser");
 const cors= require('cors');
 const apiRoutes = require('./routes/api.js');
 const indexRoute = require('./routes/index.js')
+const authRoute = require('./routes/auth.js');
 const redisClient = require('./db/redis-client.js');
+
 
 // Cors
 app.use(cors());
@@ -33,6 +35,7 @@ app.use(require(global.__basedir + '/middlewares/logger.js')());
 // Routes
 app.use('/api', apiRoutes);
 app.use('/', indexRoute);
+app.use('/auth', authRoute);
 
 app.listen(port, (req,res) => {
   console.log(`listening on ${port}`)
